@@ -1,0 +1,23 @@
+services:
+    acme_currency.currency_manager:
+        class: Acme\CurrencyBundle\Manager\CurrencyManager
+        arguments: [@doctrine]
+        tags:
+              - { name: acme_currency.currency_manager }
+
+    ajax_manager:
+        class: Acme\CurrencyBundle\Manager\AjaxManager
+        arguments: [@doctrine]
+        tags:
+              - { name: ajax_manager }
+
+    currency_type:
+        class: Acme\CurrencyBundle\Form\Type\CurrencyModelType
+        tags:
+            - { name: form.type, alias: currency_type }
+
+    currency_handler:
+        class: Acme\CurrencyBundle\Form\Handler\CurrencyHandler
+        arguments: [@form.factory, @doctrine]
+        tags:
+              - { name: currency_handler }

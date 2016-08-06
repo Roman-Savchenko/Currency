@@ -1,0 +1,11 @@
+acme_currency_load:
+    path:   /load
+    defaults: { _controller: AcmeCurrencyBundle:Currency:load }
+
+main_currency_page:
+    path:   /main
+    defaults: { _controller: AcmeCurrencyBundle:Page:index }
+
+ajax_form:
+    path:   /ajax_form
+    defaults: { _controller: AcmeCurrencyBundle:AjaxCurrency:index }

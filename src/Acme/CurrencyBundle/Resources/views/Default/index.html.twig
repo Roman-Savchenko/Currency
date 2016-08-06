@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Currency today</title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('bundles/acmecurrency/css/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('https://oss.maxcdn.com/respond/1.4.2/respond.min.js') }}"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ asset('bundles/acmecurrency/js/jquery-3.1.0.min.js') }}"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h3>Please select the currency you are interested in, and the date!</h3>
+        <form class="symfony-form-column" action="{{ url('main_currency_page') }}" method="post" {{ form_enctype(form) }}>
+            <div class="form-horizontal">
+                {{ form_row(form.currency_abbreviation) }}
+            </div>
+            <div class="form-horizontal">
+                {{ form_rest(form) }}
+            </div>
+        </form>
+        <div class="caption">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+        <div class="container">
+            <h4><span></span></h4>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("button.btn-primary").click(function () {
+            debugger;
+            var currencyId = $("select[name='currency_type[currency_abbreviation]']").val();
+            var year = $("select[name='currency_type[date][year]']").val();
+            var month = $("select[name='currency_type[date][month]']").val();
+            var day =  $("select[name='currency_type[date][day]']").val();
+            $.ajax({
+                url: '{{ path('ajax_form') }}',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    currencyId: currencyId,
+                    year      : year,
+                    month     : month,
+                    day       : day
+                },
+                success: function (data) {
+                    if (data.status) {
+                        debugger;
+                        var message = data.message;
+                        $("span").trigger("submit", message);
+                    }
+                }
+            });
+        });
+        debugger;
+        $("span").on("submit", function(event, message){
+            $(this).text(message);
+        });
+
+    });
+</script>
+
+
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('bundles/acmecurrency/js/bootstrap.js') }}"></script>
+</body>
+</html>

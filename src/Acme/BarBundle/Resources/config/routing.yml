@@ -1,0 +1,3 @@
+acme_bar_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeBarBundle:Default:index }

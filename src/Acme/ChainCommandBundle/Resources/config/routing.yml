@@ -1,0 +1,3 @@
+acme_chain_command_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeChainCommandBundle:Default:index }

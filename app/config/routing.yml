@@ -1,0 +1,19 @@
+acme_currency:
+    resource: "@AcmeCurrencyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+acme_chain_command:
+    resource: "@AcmeChainCommandBundle/Resources/config/routing.yml"
+    prefix:   /
+
+acme_foor:
+    resource: "@AcmeFoorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+acme_bar:
+    resource: "@AcmeBarBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
